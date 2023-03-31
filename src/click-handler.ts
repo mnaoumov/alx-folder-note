@@ -7,6 +7,7 @@ import { LongPressEvent } from "./modules/long-press";
 export const getClickHandler = (plugin: ALxFolderNote) => {
   const { getFolderNote, getFolderNotePath, getNewFolderNote } = plugin.CoreApi;
   return async (item: FolderItem, evt: MouseEvent): Promise<boolean> => {
+    const titleEl = item.titleInnerEl || item.selfEl;
     if (
       !item ||
       (Platform.isMobile && !plugin.settings.mobileClickToOpen) ||
@@ -14,8 +15,8 @@ export const getClickHandler = (plugin: ALxFolderNote) => {
       evt.shiftKey ||
       // triggered only when click on title
       !(
-        item.titleInnerEl === evt.target ||
-        item.titleInnerEl.contains(evt.target as Node)
+        titleEl === evt.target ||
+        titleEl?.contains(evt.target as Node)
       ) ||
       // ignore file being renamed
       item.fileExplorer.fileBeingRenamed === item.file

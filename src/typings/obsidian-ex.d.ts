@@ -59,7 +59,8 @@ declare module "obsidian" {
     fileExplorer: FileExplorerView;
     info: any;
     titleEl: HTMLDivElement;
-    titleInnerEl: HTMLDivElement;
+    titleInnerEl?: HTMLDivElement;
+    selfEl?: HTMLDivElement;
     file: TFolder;
     children: AFItem[];
     childrenEl: HTMLDivElement;
@@ -67,7 +68,8 @@ declare module "obsidian" {
     collapsed: boolean;
     pusherEl: HTMLDivElement;
     setCollapsed(collapsed: boolean): Promise<void>;
-    onTitleElClick(evt: MouseEvent): any;
+    onTitleElClick?(evt: MouseEvent): any;
+    onSelfClick?(evt: MouseEvent): any;
   }
 
   interface Vault {
